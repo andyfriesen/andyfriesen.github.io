@@ -9,16 +9,13 @@
     </head>
     <body>
         {% include header.html %}
+        {% for post in site.posts %}
         <article>
-            <ul>
-                {% for post in site.posts %}
-                <li>
-                    {{ post.date | date_to_string }} - <a href="{{ post.url }}">{{ post.title }}</a>
-                    <p>{{ post.excerpt }}</p>
-                </li>
-                {% endfor %}
-            </ul>
-        </article>
+            <h1><a href="{{post.url}}">{{post.title}}</a></h1>
+            <div class="info">{{ post.date | date_to_string }}</div>
+            <p>{{ post.content }}</p>
+        </li>
+        {% endfor %}
         {% include footer.html %}
     </body>
 </html>

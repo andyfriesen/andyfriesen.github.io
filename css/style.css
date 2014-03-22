@@ -25,8 +25,8 @@ body {
 
 pre {
     background: rgb(238, 232, 213);
-    margin: 0 -999em 0 -999em;
-    padding: 4px 999em 4px 999em;
+    margin: 0 -2em 0 -2em;
+    padding: 4px 2em 4px 2em;
 }
 
 header {
