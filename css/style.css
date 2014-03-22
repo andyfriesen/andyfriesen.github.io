@@ -34,7 +34,8 @@ pre {
 
 header {
     font-family: Inconsolata, Courier New, sans-serif;
-    color: rgb(238, 232, 213);
+    /* color: rgb(238, 232, 213);*/
+    color: rgb(203, 75, 22);
     background: rgb(7, 54, 66);
     padding: 1em 0.5em 0.5em 1em;
     margin-left: -1em;
@@ -62,4 +63,23 @@ header a {
 
 header a:visited {
 
+}
+
+article {
+    max-width: 640px;
+    margin: auto;
+}
+
+article h1 {
+    border-bottom: 1px solid rgb(7, 54, 66);
+    margin-bottom: 0;
+}
+
+article div.info:before {
+    content: "Posted on ";
+}
+
+article div.info {
+    text-align: right;
+    font-style: italic;
 }

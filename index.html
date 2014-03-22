@@ -9,13 +9,15 @@
     </head>
     <body>
         {% include header.html %}
-        <ul>
-            {% for post in site.posts %}
-            <li>
-                {{ post.date | date_to_string }} - <a href="{{ post.url }}">{{ post.title }}</a>
-                <p>{{ post.excerpt }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-</body>
+        <article>
+            <ul>
+                {% for post in site.posts %}
+                <li>
+                    {{ post.date | date_to_string }} - <a href="{{ post.url }}">{{ post.title }}</a>
+                    <p>{{ post.excerpt }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+    </body>
 </html>
