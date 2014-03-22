@@ -33,7 +33,7 @@ pre {
 }
 
 header {
-    font-family: Inconsolata, Courier New, sans-serif;
+    font-family: Inconsolata, Courier New, monospace;
     /* color: rgb(238, 232, 213);*/
     color: rgb(203, 75, 22);
     background: rgb(7, 54, 66);
@@ -82,4 +82,29 @@ article div.info:before {
 article div.info {
     text-align: right;
     font-style: italic;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+footer .status-line {
+    margin-left: -1em;
+    padding-left: 1em;
+    margin-right: 1em;
+    padding-right: 1em;
+    background-color: rgb(7, 54, 66);
+    color: rgb(253, 246, 227);
+    font-family: Inconsolata, Courier New, monospace;
+    white-space: pre;
+    width: 100%;
+    overflow: hidden;
+}
+
+footer .minibuffer {
+    background-color: rgb(235, 246, 227);
+    font-family: Inconsolata, Courier New, monospace;
 }
