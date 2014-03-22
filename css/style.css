@@ -19,7 +19,7 @@ $green: rgb(133, 153, 0);
 */
 
 body {
-    background: rgb(253. 246, 227);
+    background-color: rgb(253, 246, 227);
     color: rgb(7, 54, 66);
 }
 
@@ -30,4 +30,36 @@ pre {
     margin-left: -1em;
     padding-right: 1em;
     margin-right: -1em;
+}
+
+header {
+    font-family: Inconsolata, Courier New, sans-serif;
+    color: rgb(238, 232, 213);
+    background: rgb(7, 54, 66);
+    padding: 1em 0.5em 0.5em 1em;
+    margin-left: -1em;
+    margin-right: -1em;
+    margin-top: -1em;
+}
+
+header ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+header li {
+    display: inline-block;
+}
+
+header li+li:before {
+    content: " - ";
+}
+
+header a {
+    color: rgb(38, 139, 210);
+}
+
+header a:visited {
+
 }
