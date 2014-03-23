@@ -90,4 +90,4 @@ main :: IO ()
 main = processNextLine Prose
 ```
 
-And that's it!
+And that's it!  You can get the source code on my [Github repository](https://github.com/andyfriesen/andyfriesen.github.io/blob/master/_lhs/lhs-to-jekyll-markdown.lhs)
