@@ -1,5 +1,17 @@
 <br /><br />
 <footer>
     <div class="status-line">-uu-:---F1  index.html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All L1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(HTML)------------------------------------------------------------</div>
-    <div class="minibuffer">Loading sgml-mode...done</div>
+    <div class="minibuffer">
+        {% if paginator %}
+        &nbsp;
+            {% if paginator.previous_page %}
+            <a class="prev" href="{{paginator.previous_page_path}}">Newer</a>
+            {% endif %}
+            {% if paginator.next_page %}
+            <a class="next" href="{{paginator.next_page_path}}">Older</a>
+            {% endif %}
+        {% else %}
+            Loading sgml-mode...done
+        {% endif %}
+    </div>
 </footer>

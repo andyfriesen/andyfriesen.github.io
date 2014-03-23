@@ -85,6 +85,10 @@ article div.info {
     font-style: italic;
 }
 
+nav#archive {
+    position: absolute;
+}
+
 footer {
     position: fixed;
     left: 0;
@@ -108,4 +112,12 @@ footer .status-line {
 footer .minibuffer {
     background-color: rgb(235, 246, 227);
     font-family: Inconsolata, Courier New, monospace;
+}
+
+footer .minibuffer .prev {
+    float: right;
+}
+
+footer .minibuffer .next {
+    float: left;
 }
