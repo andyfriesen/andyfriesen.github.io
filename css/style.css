@@ -72,6 +72,10 @@ article h1 {
     margin-bottom: 0;
 }
 
+article h1 a {
+    text-decoration: none;
+}
+
 article div.info:before {
     content: "Posted on ";
 }
