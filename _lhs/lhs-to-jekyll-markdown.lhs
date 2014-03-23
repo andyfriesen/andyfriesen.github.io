@@ -2,14 +2,15 @@
 layout: post
 title: Literate Haskell and Jekyll
 ---
-I think I've more or less decided to switch my blog over to use Jekyll.  It's pretty neat and it means I can sleep
-safer knowing that I'm not running crazy unmaintained PHP on some poor unsuspecting web host.
+I think I've more or less decided to switch my blog over to use [Github Pages](http://pages.github.com/) and
+[Jekyll](http://jekyllrb.com/).  It's pretty neat and it means I can sleep safer knowing that I'm not inadvertently
+inflicting unpatched PHP on some poor unsuspecting web host.
 
 One of the things that's kind of annoying, though, is that Jekyll won't correctly handle Literate Haskell out of the
 box.  You can drop code into a Markdown document and it will even syntax highlight it, but it doesn't support any
 syntax that also happens to line up with Literate Haskell.
 
-Clearly, this is a problem in need of a solution.
+Clearly, this is a problem in need of a [self-referential solution](https://github.com/andyfriesen/andyfriesen.github.io/blob/master/_lhs/lhs-to-jekyll-markdown.lhs).
 
 > {-# LANGUAGE OverloadedStrings #-}
 > module Main where
@@ -30,7 +31,8 @@ We run a very basic state machine: each line is either part of a Literate Haskel
 >         LHS   -> processLhsLine
 >         Prose -> processProseLine
 
-Prose is easy.  Unless the line has a bird track, read it in and spit it out.
+When looking at prose, all we need to do is watch out for lines that have bird tracks.  If it's anything else,
+spit the line out verbatim.
 
 > processProseLine :: IO ()
 > processProseLine = do
@@ -54,10 +56,10 @@ LHS is pretty much identical, but we need to strip the bird track from each line
 >         else
 >             switchToProse line
 
-To flip between states, print out a line that signifies Haskell or not-Haskell, and keep on truckin.
+To flip between states, print out a line that signifies Haskell or not-Haskell, and resume in the new state.
 
 It's kind of funny that we call this sort of recursion "functional."  In this program, it looks an awful lot like
-"goto" :)
+"goto." :)
 
 > switchToLhs :: T.Text -> IO ()
 > switchToLhs line = do
@@ -80,4 +82,6 @@ It's kind of funny that we call this sort of recursion "functional."  In this pr
 > main :: IO ()
 > main = processNextLine Prose
 
-And that's it!  You can get the source code on my [Github repository](https://github.com/andyfriesen/andyfriesen.github.io/blob/master/_lhs/lhs-to-jekyll-markdown.lhs)
+And that's it!
+
+[Source](https://github.com/andyfriesen/andyfriesen.github.io/blob/master/_lhs/lhs-to-jekyll-markdown.lhs)
