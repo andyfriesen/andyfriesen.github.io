@@ -16,17 +16,25 @@ Clearly, this is a problem in need of a [self-referential solution](https://gith
 > module Main where
 >
 > import System.IO (stdin, stdout, hIsEOF)
-> import Control.Monad (unless)
+> import Control.Monad (when, unless)
 > import qualified Data.Text as T
 > import Data.Text.IO (hGetLine, hPutStrLn)
 
 We run a very basic state machine: each line is either part of a Literate Haskell block, or it isn't.
 
 > data State = LHS | Prose
+>     deriving (Eq)
 >
 > processNextLine :: State -> IO ()
 > processNextLine state = do
 >     eof <- hIsEOF stdin
+>
+>     -- UPDATE 3 April 2014: My program had a bug! It would not close the last
+>     -- Markdown group if the last line of the input program was Haskell code and
+>     -- not prose.
+>     when (eof && state == LHS) $
+>         hPutStrLn stdout "```"
+>
 >     unless eof $ case state of
 >         LHS   -> processLhsLine
 >         Prose -> processProseLine
