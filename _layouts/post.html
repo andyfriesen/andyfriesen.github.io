@@ -9,7 +9,7 @@
         {% include header.html %}
         <article>
             <h1><a href="{{page.url}}">{{page.title}}</a></h1>
-            <div class="info">{{ page.date | date_to_string }}</div>
+            <div class="info">{{ page.date }}</div>
             {{ content | markdownify }}
         </article>
         {% include footer.html %}
