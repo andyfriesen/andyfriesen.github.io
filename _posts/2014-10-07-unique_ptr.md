@@ -195,3 +195,5 @@ It looks like the destructor isn't being inlined.  That's a shame.  I wasn't abl
 * You pay a bit for each distinct specialization of `unique_ptr<>`, but it's **cheaper** than what you pay for an explicit `delete` statement.
 * You pay a bit of filesize for each kind of `unique_ptr<>`.
 * It's basically free to talk about many `unique_ptr<>`s of the same type.
+
+[Code](https://github.com/andyfriesen/benchmark_unique_ptr)
