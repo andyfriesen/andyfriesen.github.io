@@ -4,7 +4,7 @@ title: "What does unique_ptr<> cost?"
 ---
 I just watched [Jonathan Blow's proposal](http://www.youtube.com/watch?v=TH9VCN6UkyQ) for a new programming language, which got me thinking about the difficulties that motivated the talk.
 
-In particular, I think `unique_ptr<>` is fantastic, but I'm curious about what it costs.  Let's find out.
+In particular, I think `unique_ptr<>` is fantastic, but I'm curious about how it affects compile times and code size.  Let's find out.
 
 First, some C++
 
