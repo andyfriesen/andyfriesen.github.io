@@ -7,7 +7,7 @@ One of the capabilities we have at IMVU is the ability to write unit tests which
 reliable.  Here's how it works.
 
 This post is Literate Haskell, which basically means you can point GHC at it directly and run it.
-You can download it [here]().
+You can download it [here](https://raw.githubusercontent.com/andyfriesen/andyfriesen.github.io/master/_lhs/testable-io-in-haskell.lhs).
 
 We'll start with some boilerplate.
 
