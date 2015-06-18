@@ -4,7 +4,8 @@ title: "Testable IO in Haskell"
 ---
 
 At IMVU, we write a lot of tests.  Ideally, we write tests for every feature and bugfix
-we write.  The problem we run into is one of scale: if each of IMVU's tests were 99.9% reliable, they would cause a build out of every 5 to fail.
+we write.  The problem we run into is one of scale: if each of IMVU's tests were 99.9% reliable, 
+1 out of every 5 runs would result in an intermittent failure.
 
 Tests erroneously fail for lots of reasons: the test could be running in the midst of the "extra" daylight-savings hour
 or a leap day (or a leap second!).  The database could have been left corrupted by another test.  CPU scheduling could prioritize one
