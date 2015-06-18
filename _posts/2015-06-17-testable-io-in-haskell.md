@@ -3,8 +3,20 @@ layout: post
 title: "Testable IO in Haskell"
 ---
 
-One of the capabilities we have at IMVU is the ability to write unit tests which are statically proven to be completely
-reliable.  Here's how it works.
+At IMVU, we write a lot of tests.  Ideally, we write tests for every feature and bugfix
+we write.  The problem we run into is one of scale: if each of IMVU's tests were 99.9% reliable, we would never
+see a successful test run.
+
+Tests erroneously fail for lots of reasons: the test could be running in the midst of the "extra" daylight-savings hour
+or a leap day (or a leap second!).  The database could have been left corrupted by another test.  CPU scheduling could prioritize one
+process over another.  Maybe the random number generator just so happened to produce two zeroes in a row.
+
+All of these things boil down to the same root cause: nondeterminism within the test.
+
+We've done a lot of work at IMVU to isolate and control nondeterminism in our test frameworks.  One of my favourite
+techniques is the way we make our Haskell tests provably perfectly deterministic.
+
+Here's how it works.
 
 This post is Literate Haskell, which basically means you can point GHC at it directly and run it.
 You can download it [here](https://raw.githubusercontent.com/andyfriesen/andyfriesen.github.io/master/_lhs/testable-io-in-haskell.lhs).
@@ -170,7 +182,17 @@ freely:
 ```haskell
     forM_ (reverse $ fsWrittenLines endState) $ \line ->
         print line
-
-instance Show FakeState where
-    show FS{fsWrittenLines} = "FakeState { fsWrittenLines = " ++ (show fsWrittenLines) ++ " }"
 ```
+
+That's it!
+
+In a real application, your `FakeState` analogue will be much more complex, potentially including things like a clock,
+a pseudo-random number generator, and potentially state for a pure database of some sort.  Some of these things are
+themselves complex to build out, but, as long as those implementations are pure, everything snaps together neatly.
+
+If complete isolation from IO is impractical, this technique could also be adjusted to run atop a `StateT` rather than
+pure `State`.  This allows for imperfect side-effect isolation where necessary.
+
+Happy testing!
+
+[Source Code](https://raw.githubusercontent.com/andyfriesen/andyfriesen.github.io/master/_lhs/testable-io-in-haskell.lhs).
