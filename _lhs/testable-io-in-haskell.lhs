@@ -134,7 +134,7 @@ First, we'll craft a `readLine` implementation that produces the empty string on
 Making this function more natural without compromising extensibility is left as an exercise to the reader. :)
 
 Note that by providing the type `FakeIO String`, we have effectively authored an action that can _only_ be used in a
-unit test.  The compile will fail if testable code calls this, but not vice versa.
+unit test.  The build will fail if production code tries to use this action.
 
 >     let readLine_that_is_incorrect_once :: FakeIO String
 >         readLine_that_is_incorrect_once = do
