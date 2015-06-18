@@ -4,8 +4,7 @@ title: "Testable IO in Haskell"
 ---
 
 At IMVU, we write a lot of tests.  Ideally, we write tests for every feature and bugfix
-we write.  The problem we run into is one of scale: if each of IMVU's tests were 99.9% reliable, we would never
-see a successful test run.
+we write.  The problem we run into is one of scale: if each of IMVU's tests were 99.9% reliable, they would cause a build out of every 5 to fail.
 
 Tests erroneously fail for lots of reasons: the test could be running in the midst of the "extra" daylight-savings hour
 or a leap day (or a leap second!).  The database could have been left corrupted by another test.  CPU scheduling could prioritize one
@@ -76,6 +75,8 @@ application up in a record.
 
 > type FakeIO = S.State FakeState
 
+(I'll get to `FakeState` in a second)
+
 Aside from reliability, this design has another very useful property: It is impossible for tests to interfere with one
 another even if many tests share the same state.  This means that "test fixtures" can trivially be effected by simply
 running an action and using the resulting state in as many tests as desired.
@@ -123,9 +124,6 @@ We also write a small helper function to make unit tests read a bit more natural
 
 Now, let's write our first unit test.
 
-> main :: IO ()
-> main = do
-
 We wish to test that our application rejects the empty string as a name.  When the user does this, we wish to verify
 that the customer sees an error message and is asked again for their name.
 
@@ -136,6 +134,8 @@ Making this function more natural without compromising extensibility is left as 
 Note that by providing the type `FakeIO String`, we have effectively authored an action that can _only_ be used in a
 unit test.  The build will fail if production code tries to use this action.
 
+> main :: IO ()
+> main = do
 >     let readLine_that_is_incorrect_once :: FakeIO String
 >         readLine_that_is_incorrect_once = do
 >             S.modify (\s -> s { fsReadLine = return "Joe" })
