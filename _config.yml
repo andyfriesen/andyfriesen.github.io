@@ -1,3 +1,4 @@
 markdown: redcarpet
 encoding: utf-8
 paginate: 1
+highlighter: pygments

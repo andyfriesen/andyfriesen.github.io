@@ -16,7 +16,7 @@ If your loop doesn’t require side effects, the thing you’re actually after i
 
 ## Transforming Elements
 
-If you just want to transform each element of a collection, but you don’t want to change the type of collection at all, you probably want a map.  The map function is called `map` and has this signature:
+If you just want to transform each element of a collection, but you don’t want to change the type (or length!) of the collection at all, you probably want a map.  The map function is called `map` and has this signature:
 
 ```haskell
 map :: (a -> b) -> [a] -> [b]
@@ -56,6 +56,8 @@ count l =
 
 ## Accumulations that exit early sometimes
 
+*Edited: Updated this section per feedback from [lamefun](https://www.reddit.com/user/lamefun).  Thanks!*.
+
 Consider this:
 
 ```js
@@ -70,23 +72,24 @@ function indexOf(list, element) {
 
 This is superficially similar to what we were doing above, but we want to stop looping when we hit a certain point.
 
-Sadly, the best I can come up with requires composing a few things together:
+When the builtin traversals don't obviously provide something you actually want, the end-all solution is the tail-recursive loop.
+
+This is the most manual way to loop in Haskell, and as such it's the most flexible.
 
 ```haskell
 indexOf' list element =
-    let test acc e
-            | element == e = Left acc
-            | otherwise    = Right (acc + 1)
-    in case foldM test 0 list of
-        Left i -> Just i
-        Right _ -> Nothing
+    let step l index = case l of
+            [] -> Nothing
+            (x:xs) ->
+                if x == element
+                    then Just index
+                    else step xs (index + 1)
+    in step list 0
 ```
 
-`foldM` comes from the `Data.Foldable` module.
+The pattern you want to follow is to write a helper function that takes as arguments all the state that changes from iteration to iteration.  When you want to update your state and jump to the start of the loop, do a recursive call with your new, updated arguments.
 
-In this example, `test` is a function that returns an `Either`.  If the function returns `Left` something, the loop will end and that will be the ultimate result of the `foldM` call.  If the function returns `Right` something, the loop will run one more iteration, and the returned value will become the new accumulator.
-
-Note that this means it’s trivial to sense whether the loop actually ran to completion or if it stopped partway through.
+The only thing to worry about is to ensure that your recursive call is in [tail position](https://en.wikipedia.org/wiki/Tail_call).  The compiler will optimize tail calls into "goto" instructions rather than "calls."
 
 # Impure Loops
 
@@ -152,7 +155,7 @@ main = do
 
 ## Accumulation with early termination
 
-The simplest thing is to hand-roll a tail-recursive loop.
+Just like with pure code, when libraries don't seem to offer what you want, just write out the tail-recursive loop.  The only difference is that monadic functions generally have to `return` some value in non-recursive cases.  If you just want to do stuff and don't have a result you want to carry back, return `()`.  Think of it as an empty tuple.
 
 ```haskell
 main = do
