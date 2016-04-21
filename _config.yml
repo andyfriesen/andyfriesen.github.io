@@ -1,6 +1,6 @@
 markdown: kramdown
 encoding: utf-8
 paginate: 1
-highlighter: pygments
+highlighter: rouge
 gems:
   - jekyll-feed
