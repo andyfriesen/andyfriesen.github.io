@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>Happy Holidays from the Friesens!</title>
+	<style type="text/css">
+		body {
+			background-color: #00755E;
+		}
+		img {
+			border: 1px solid white;
+		}
+		div {
+			color: white;
+			font-family: "Arial", sans-serif;
+			font-weight: bold;
+			text-shadow: 2px 2px 8px black;
+		}
+		/* entire container, keeps perspective */
+		.flip-container {
+			perspective: 1000px;
+		}
+
+		/* flip the pane when hovered */
+		.flip-container.flipped .flipper, .flip-container.hover .flipper {
+			transform: rotateY(180deg);
+		}
+
+		.flip-container, .front, .back {
+			width: 600px;
+			height: 800px;
+		}
+
+		/* flip speed goes here */
+		.flipper {
+			transition: 0.6s;
+			transform-style: preserve-3d;
+
+			position: relative;
+		}
+
+		/* hide back of pane during swap */
+		.front, .back {
+			backface-visibility: hidden;
+
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		/* front pane, placed above back */
+		.front {
+			z-index: 2;
+			/* for firefox 31 */
+			transform: rotateY(0deg);
+		}
+
+		/* back, initially hidden pane */
+		.back {
+			transform: rotateY(180deg);
+		}
+	</style>
+</head>
+
+
+<body>
+
+<center>
+	<div id="clickme">
+		<br>
+		Click to flip the card over. :)
+		<br><br>
+	</div>
+	<div class="flip-container" ontouchstart="this.classList.toggle('flipped');" onclick="this.classList.toggle('flipped');">
+		<div class="flipper">
+			<div class="front">
+				<img src="xmas_front.png">
+			</div>
+			<div class="back">
+				<img src="xmas_back.png">
+			</div>
+		</div>
+	</div>
+</center>
+
+</body>
+</html>
