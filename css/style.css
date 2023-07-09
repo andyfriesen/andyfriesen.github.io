@@ -35,8 +35,8 @@ pre {
 header {
     font-family: Inconsolata, Courier New, monospace;
     /* color: rgb(238, 232, 213);*/
-    color: rgb(203, 75, 22);
-    background: rgb(7, 54, 66);
+    color: rgb(255, 92, 28);
+    background: rgb(5, 44, 53);
     padding: 1em 0.5em 0.5em 1em;
     margin-top: -1em;
 }
@@ -56,11 +56,7 @@ header li+li:before {
 }
 
 header a {
-    color: rgb(38, 139, 210);
-}
-
-header a:visited {
-
+    color: rgb(48, 172, 255);
 }
 
 article {
@@ -102,7 +98,7 @@ footer .status-line {
     padding-left: 1em;
     margin-right: 1em;
     padding-right: 1em;
-    background-color: rgb(7, 54, 66);
+    background-color: rgb(5, 44, 53);
     color: rgb(253, 246, 227);
     font-family: Inconsolata, Courier New, monospace;
     white-space: pre;
